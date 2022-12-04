@@ -58,5 +58,7 @@ public class Imagen {
     public void setReclamo(Reclamo p) {
         this.reclamo = p;
     }
+
+
 }
 
