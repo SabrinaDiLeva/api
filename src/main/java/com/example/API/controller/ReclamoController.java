@@ -16,8 +16,10 @@ public class ReclamoController {
     @Autowired
     private ReclamoService reclamoService;
 
-    @PostMapping
-    public ResponseEntity<Reclamo> guardar(@RequestBody ReclamoDTO reclamo) {
+    @PostMapping("/{unidad}/{persona}")
+    public ResponseEntity<Reclamo> guardar(@RequestBody ReclamoDTO reclamo,@PathVariable Long unidad, @PathVariable Long persona) {
+        reclamo.setPersonaId(persona);
+        reclamo.setUnidadId(unidad);
         return ResponseEntity.ok(reclamoService.guardar(reclamo));
     }
 
