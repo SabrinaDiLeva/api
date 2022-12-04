@@ -87,17 +87,13 @@ public class UnidadService implements IService<Unidad,UnidadDTO> {
         return iInquilinoRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    public Unidad transferir(Long unidadId, Long duenioId){
+    public void transferir(Long unidadId, Long duenioId){
         Unidad unidad = buscar(unidadId);
         Set<Duenio> duenios = unidad.getDuenio();
         if(duenios.size()==1){
             duenios.removeAll(duenios);
-            Duenio duenioNuevo = iDuenioRepository.findById(duenioId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-            duenios.add(duenioNuevo);
-            unidad.setDuenio(duenios);
+            agregarDuenio(unidadId,duenioId);
         }
-        UnidadDTO dto = new UnidadDTO(unidad.getId(),unidad.getPiso(),unidad.getNro(),unidad.getHabitado(),unidad.getEdificio().getId(),duenios,unidad.getInquilino());
-        return this.guardar(dto.update(unidad));
     }
 
     public Unidad agregarDuenio(Long u, Long d){
@@ -105,11 +101,8 @@ public class UnidadService implements IService<Unidad,UnidadDTO> {
         Set<Duenio> duenios =unidad.getDuenio();
         duenios.add(buscarDuenio(d));
         unidad.setDuenio(duenios);
-        //modificar(u,new UnidadDTO().update(unidad));
-        return this.guardar(new UnidadDTO().update(unidad));
+        return iUnidadRepository.save(unidad);
     }
-    //Unidad unidad = this.buscar(id);
-        //return this.guardar(dto.update(unidad));
 
     public void alquilar(Long u, Long i){
         Unidad unidad = buscar(u);
