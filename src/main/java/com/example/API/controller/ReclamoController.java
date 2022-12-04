@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin( origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT})
 @RequestMapping("/reclamo")
 public class ReclamoController {
     @Autowired
@@ -23,17 +24,17 @@ public class ReclamoController {
         return ResponseEntity.ok(reclamoService.guardar(reclamo));
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    //@CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
     public ResponseEntity<List<Reclamo>>  listar() {
         return ResponseEntity.ok(reclamoService.listar());
     }
-    @CrossOrigin(origins = "http://localhost:3000")
+    //@CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/unidad/{id}")
     public ResponseEntity<List<Reclamo>>  listarPorCategoria(@PathVariable Long id) {
         return ResponseEntity.ok(reclamoService.listarPorIdUnidad(id));
     }
-    @CrossOrigin(origins = "http://localhost:3000")
+    //@CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/persona/{id}")
     public ResponseEntity<List<Reclamo>>  listarPorPersona(@PathVariable Long id) {
         return ResponseEntity.ok(reclamoService.listarPorIdPersona(id));

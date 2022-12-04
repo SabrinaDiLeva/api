@@ -17,6 +17,7 @@ import java.util.Set;
 import java.util.List;
 
 @RestController
+@CrossOrigin( origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT})
 @RequestMapping("/unidad")
 public class UnidadController {
     @Autowired
@@ -27,25 +28,25 @@ public class UnidadController {
         return ResponseEntity.ok(unidadService.guardar(unidad));
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    //@CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
     public ResponseEntity<List<Unidad>>  listar() {
         return ResponseEntity.ok(unidadService.listar());
     }
 
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    //@CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/edificio/{id}")
     public ResponseEntity<List<Unidad>>  listarPorEdificio(@PathVariable Long id) {
         return ResponseEntity.ok(unidadService.listarPorIdEdificio(id));
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    //@CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{id}/duenios")
     public ResponseEntity<Set<Duenio>>  listarDuenios(@PathVariable Long id) {
         return ResponseEntity.ok(unidadService.listarDuenios(id));
     }
-    @CrossOrigin(origins = "http://localhost:3000")
+    //@CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{id}/inquilinos")
     public ResponseEntity<Set<Inquilino>>  listarInquilinos(@PathVariable Long id) {
         return ResponseEntity.ok(unidadService.listarInquilinos(id));

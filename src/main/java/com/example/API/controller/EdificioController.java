@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin( origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT})
 @RequestMapping("/edificio")
 public class EdificioController {
     @Autowired
@@ -22,29 +23,29 @@ public class EdificioController {
         return ResponseEntity.ok(edificioService.guardar(edificio));
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    //@CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
     public ResponseEntity<List<Edificio>>  listar() {
         return ResponseEntity.ok(edificioService.listar());
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    //@CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/unidadeslibres/{id}")
     public ResponseEntity<List<Unidad>>  listarLibres(@PathVariable Long id) {
         return ResponseEntity.ok(edificioService.listarLibres(id));
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    //@CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/duenios/{id}")
     public ResponseEntity<List<Duenio>>  listarDuenios(@PathVariable Long id) {
         return ResponseEntity.ok(edificioService.listarDuenios(id));
     }
-    @CrossOrigin(origins = "http://localhost:3000")
+    //@CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/inquilinos/{id}")
     public ResponseEntity<List<Inquilino>> listarInquilinos(@PathVariable Long id) {
         return ResponseEntity.ok(edificioService.listarInquilinos(id));
     }
-    @CrossOrigin(origins = "http://localhost:3000")
+    //@CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/reclamos/{id}")
     public ResponseEntity<List<Reclamo>> listarReclamos(@PathVariable Long id) {
         return ResponseEntity.ok(edificioService.listarReclamos(id));

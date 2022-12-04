@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/inquilino")
+@CrossOrigin( origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT})
 public class InquilinoController {
     @Autowired
     private InquilinoService inquilinoService;
@@ -21,7 +22,7 @@ public class InquilinoController {
         return ResponseEntity.ok(inquilinoService.guardar(inquilino));
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    //@CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
     public ResponseEntity<List<Inquilino>>  listar() {
         return ResponseEntity.ok(inquilinoService.listar());

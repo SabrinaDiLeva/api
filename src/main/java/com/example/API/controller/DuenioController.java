@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin( origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT})
 @RequestMapping("/duenio")
 public class DuenioController {
     @Autowired
@@ -21,7 +22,7 @@ public class DuenioController {
         return ResponseEntity.ok(duenioService.guardar(duenio));
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    //@CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
     public ResponseEntity<List<Duenio>>  listar() {
         return ResponseEntity.ok(duenioService.listar());
