@@ -104,7 +104,15 @@ public class UnidadService implements IService<Unidad,UnidadDTO> {
         return iUnidadRepository.save(unidad);
     }
 
-    public void alquilar(Long u, Long i){
+    public Unidad agregarInquilino(Long u, Long i){
+        Unidad unidad = buscar(u);
+        Set<Inquilino> inquilinos =unidad.getInquilino();
+        inquilinos.add(buscarInquilino(i));
+        unidad.setInquilino(inquilinos);
+        return iUnidadRepository.save(unidad);
+    }
+
+    public Unidad alquilar(Long u, Long i){
         Unidad unidad = buscar(u);
         Set<Inquilino> inquilinos =unidad.getInquilino();
         if(inquilinos.size()==0){
@@ -112,15 +120,18 @@ public class UnidadService implements IService<Unidad,UnidadDTO> {
             unidad.setHabitado(true);
             unidad.setInquilino(inquilinos);
         }
+        return iUnidadRepository.save(unidad);
 
     }
 
-    public void liberar(Long u){
+
+    public Unidad liberar(Long u){
         Unidad unidad = buscar(u);
         Set<Inquilino> inquilinos =unidad.getInquilino();
         inquilinos.removeAll(inquilinos);
         unidad.setInquilino(inquilinos);
         unidad.setHabitado(false);
+        return iUnidadRepository.save(unidad);
     }
 
 }

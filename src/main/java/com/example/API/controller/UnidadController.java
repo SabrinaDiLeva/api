@@ -62,14 +62,20 @@ public class UnidadController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
+    @PutMapping("/{id}/agregarinquilino/{inquilino}")
+    public ResponseEntity<Unidad>  agregarInquilino(@PathVariable Long id, @PathVariable Long inquilino) {
+        unidadService.agregarInquilino(id, inquilino);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
     @PutMapping("/{id}/alquilar/{inquilino}")
-    public ResponseEntity<Void>  alquilar(@PathVariable Long id, @PathVariable Long inquilino) {
+    public ResponseEntity<Unidad>  alquilar(@PathVariable Long id, @PathVariable Long inquilino) {
         unidadService.alquilar(id, inquilino);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @PutMapping("/{id}/liberar")
-    public ResponseEntity<Void>  liberar(@PathVariable Long id) {
+    public ResponseEntity<Unidad>  liberar(@PathVariable Long id) {
         unidadService.liberar(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
