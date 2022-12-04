@@ -53,7 +53,7 @@ public class EdificioService implements IService<Edificio, EdificioDTO> {
         Edificio edificio = this.buscar(id);
         return this.guardar(dto.update(edificio));
     }
-    /*
+
 
     public List<Unidad> listarLibres(Long id){
         List<Unidad> unidadesDelEdificio= iUnidadRepository.findAllByEdificio_Id(id);
@@ -102,5 +102,5 @@ public class EdificioService implements IService<Edificio, EdificioDTO> {
             }
         }
         return reclamosDelEdificio;
-    }*/
+    }
 }

@@ -1,7 +1,7 @@
 package com.example.API.controller;
 
 import com.example.API.dto.EdificioDTO;
-import com.example.API.model.Edificio;
+import com.example.API.model.*;
 import com.example.API.service.EdificioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,7 +27,7 @@ public class EdificioController {
     public ResponseEntity<List<Edificio>>  listar() {
         return ResponseEntity.ok(edificioService.listar());
     }
-/*
+
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/unidadeslibres/{id}")
     public ResponseEntity<List<Unidad>>  listarLibres(@PathVariable Long id) {
@@ -48,7 +48,7 @@ public class EdificioController {
     @GetMapping("/reclamos/{id}")
     public ResponseEntity<List<Reclamo>> listarReclamos(@PathVariable Long id) {
         return ResponseEntity.ok(edificioService.listarReclamos(id));
-    }*/
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Edificio> buscar(@PathVariable Long id) {
