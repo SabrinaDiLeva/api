@@ -112,6 +112,22 @@ public class UnidadService implements IService<Unidad,UnidadDTO> {
         return iUnidadRepository.save(unidad);
     }
 
+    public Unidad quitarDuenio(Long u, Long d){
+        Unidad unidad = buscar(u);
+        Set<Duenio> duenios =unidad.getDuenio();
+        duenios.remove(buscarDuenio(d));
+        unidad.setDuenio(duenios);
+        return iUnidadRepository.save(unidad);
+    }
+
+    public Unidad quitarInquilino(Long u, Long i){
+        Unidad unidad = buscar(u);
+        Set<Inquilino> inquilinos =unidad.getInquilino();
+        inquilinos.remove(buscarInquilino(i));
+        unidad.setInquilino(inquilinos);
+        return iUnidadRepository.save(unidad);
+    }
+
     public Unidad alquilar(Long u, Long i){
         Unidad unidad = buscar(u);
         Set<Inquilino> inquilinos =unidad.getInquilino();
