@@ -62,6 +62,16 @@ public class Unidad {
         this.edificio=edificio;
     }
 
+    public Unidad(Long id, int piso, int nro, boolean habitado, Edificio edificio, Set<Duenio> duenios, Set<Inquilino> inquilinos){
+        this.id=id;
+        this.piso=piso;
+        this.nro=nro;
+        this.habitado=habitado;
+        this.edificio=edificio;
+        this.duenio=duenios;
+        this.inquilino=inquilinos;
+    }
+
     public Long getId() {
         return id;
     }

@@ -1,6 +1,10 @@
 package com.example.API.controller;
 
+import com.example.API.dto.EdificioDTO;
 import com.example.API.dto.UnidadDTO;
+import com.example.API.model.Duenio;
+import com.example.API.model.Edificio;
+import com.example.API.model.Inquilino;
 import com.example.API.model.Unidad;
 import com.example.API.service.UnidadService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +33,7 @@ public class UnidadController {
         return ResponseEntity.ok(unidadService.listar());
     }
 
-    /*
+
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/edificio/{id}")
     public ResponseEntity<List<Unidad>>  listarPorEdificio(@PathVariable Long id) {
@@ -53,7 +57,7 @@ public class UnidadController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
     @PutMapping("/{id}/agregarduenio/{duenio}")
-    public ResponseEntity<Void>  agregarDuenio(@PathVariable Long id, @PathVariable Long duenio) {
+    public ResponseEntity<Unidad>  agregarDuenio(@PathVariable Long id, @PathVariable Long duenio) {
         unidadService.agregarDuenio(id, duenio);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
@@ -70,7 +74,6 @@ public class UnidadController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-     */
     @GetMapping("/{id}")
     public ResponseEntity<Unidad> buscar(@PathVariable Long id) {
         Unidad unidad = unidadService.buscar(id);

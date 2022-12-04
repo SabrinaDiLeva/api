@@ -2,8 +2,11 @@ package com.example.API.service;
 
 import java.util.Set;
 
+import com.example.API.dto.EdificioDTO;
 import com.example.API.dto.UnidadDTO;
+import com.example.API.model.Duenio;
 import com.example.API.model.Edificio;
+import com.example.API.model.Inquilino;
 import com.example.API.model.Unidad;
 import com.example.API.repository.IDuenioRepository;
 import com.example.API.repository.IEdificioRepository;
@@ -61,7 +64,6 @@ public class UnidadService implements IService<Unidad,UnidadDTO> {
         Unidad unidad = this.buscar(id);
         return this.guardar(dto.update(unidad));
     }
-    /*
 
     public List<Unidad> listarPorIdEdificio(Long id) {
         return iUnidadRepository.findAllByEdificio_Id(id);
@@ -84,24 +86,31 @@ public class UnidadService implements IService<Unidad,UnidadDTO> {
     public Inquilino buscarInquilino(Long id) {
         return iInquilinoRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
-    public void transferir(Long u, Long d){
-        Unidad unidad = buscar(u);
-        Set<Duenio> duenios =unidad.getDuenio();
+
+    public Unidad transferir(Long unidadId, Long duenioId){
+        Unidad unidad = buscar(unidadId);
+        Set<Duenio> duenios = unidad.getDuenio();
         if(duenios.size()==1){
             duenios.removeAll(duenios);
-            duenios.add(buscarDuenio(d));
+            Duenio duenioNuevo = iDuenioRepository.findById(duenioId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+            duenios.add(duenioNuevo);
             unidad.setDuenio(duenios);
         }
-
+        UnidadDTO dto = new UnidadDTO(unidad.getId(),unidad.getPiso(),unidad.getNro(),unidad.getHabitado(),unidad.getEdificio().getId(),duenios,unidad.getInquilino());
+        return this.guardar(dto.update(unidad));
     }
 
-    public void agregarDuenio(Long u, Long d){
+    public Unidad agregarDuenio(Long u, Long d){
         Unidad unidad = buscar(u);
         Set<Duenio> duenios =unidad.getDuenio();
         duenios.add(buscarDuenio(d));
         unidad.setDuenio(duenios);
-
+        //modificar(u,new UnidadDTO().update(unidad));
+        return this.guardar(new UnidadDTO().update(unidad));
     }
+    //Unidad unidad = this.buscar(id);
+        //return this.guardar(dto.update(unidad));
+
     public void alquilar(Long u, Long i){
         Unidad unidad = buscar(u);
         Set<Inquilino> inquilinos =unidad.getInquilino();
@@ -121,5 +130,4 @@ public class UnidadService implements IService<Unidad,UnidadDTO> {
         unidad.setHabitado(false);
     }
 
-     */
 }
