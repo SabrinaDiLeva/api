@@ -5,11 +5,14 @@ import com.example.API.model.Reclamo;
 import com.example.API.model.Unidad;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class ReclamoDTO implements Serializable {
     public static final int UBICACION_MAX_LENGTH = 300;
     public static final int DESCRIPCION_MAX_LENGTH = 300;
     public static final int ESTADO_MAX_LENGTH = 100;
+
+    public static final int COMENTARIO_MAX_LENGTH = 300;
 
     private Long id;
     private String ubicacion;
@@ -18,19 +21,24 @@ public class ReclamoDTO implements Serializable {
     private Long personaId;
     private Long unidadId;
 
+    private LocalDate fecha;
+
+    private String comentario;
     public ReclamoDTO(){
 
     }
-    public ReclamoDTO(Long id, String ubicacion, String descripcion, String estado, Long persona, Long unidad){
+    public ReclamoDTO(Long id, String ubicacion, String descripcion, String estado, Long persona, Long unidad, LocalDate fecha, String comentario){
         this.id=id;
         this.ubicacion=ubicacion;
         this.descripcion=descripcion;
         this.estado=estado;
         this.personaId=persona;
         this.unidadId=unidad;
+        this.fecha=fecha;
+        this.comentario=comentario;
     }
     public Reclamo newReclamo(Persona persona, Unidad unidad) {
-        return new Reclamo( this.id , this.ubicacion,this.descripcion,this.estado,persona,unidad);
+        return new Reclamo( this.id , this.ubicacion,this.descripcion,this.estado,persona,unidad,this.fecha,this.comentario);
     }
 
     public ReclamoDTO update(Reclamo reclamo){
@@ -40,9 +48,12 @@ public class ReclamoDTO implements Serializable {
             reclamo.setDescripcion(this.descripcion);
         if (this.estado != null && estado.length() <= ESTADO_MAX_LENGTH)
             reclamo.setEstado(this.estado);
+        if(this.comentario!=null && comentario.length()<= COMENTARIO_MAX_LENGTH)
+            reclamo.setComentario(comentario);
+        reclamo.setFecha(fecha);
         Long personaId = ( this.personaId == null )? reclamo.getPersona().getId() : this.personaId;
         Long unidadId = ( this.unidadId == null )? reclamo.getUnidad().getId() : this.unidadId;
-        return new ReclamoDTO(reclamo.getId(), reclamo.getUbicacion(),reclamo.getDescripcion(),reclamo.getEstado(),personaId,unidadId );
+        return new ReclamoDTO(reclamo.getId(), reclamo.getUbicacion(),reclamo.getDescripcion(),reclamo.getEstado(),personaId,unidadId,reclamo.getFecha(),reclamo.getComentario());
     }
 
     public Long getId() {

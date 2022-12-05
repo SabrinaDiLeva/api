@@ -19,6 +19,9 @@ public class Persona {
     @Column
     private String nombre;
 
+    @Column
+    private String contrasenia;
+
     @OneToOne(mappedBy="persona")
     private Duenio duenio;
 
@@ -32,10 +35,11 @@ public class Persona {
     public Persona() {
     }
 
-    public Persona(Long id, String documento, String nombre) {
+    public Persona(Long id, String documento, String nombre, String contrasenia) {
         this.id = id;
         this.documento = documento;
         this.nombre = nombre;
+        this.contrasenia=contrasenia;
     }
 
     public Long getId() {
@@ -62,4 +66,15 @@ public class Persona {
         this.nombre = nombre;
     }
 
+    public void setDocumento(String documento) {
+        this.documento = documento;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
 }
