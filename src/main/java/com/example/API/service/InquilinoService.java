@@ -1,6 +1,7 @@
 package com.example.API.service;
 
 import com.example.API.dto.InquilinoDTO;
+import com.example.API.model.Duenio;
 import com.example.API.model.Inquilino;
 import com.example.API.model.Persona;
 import com.example.API.repository.IInquilinoRepository;
@@ -52,5 +53,17 @@ public class InquilinoService implements IService<Inquilino,InquilinoDTO> {
     public Inquilino modificar(Long id, InquilinoDTO dto) {
         Inquilino inquilino = this.buscar(id);
         return this.guardar(dto.update(inquilino));
+    }
+
+    public boolean autenticar(String documento, String contrasenia){
+        List<Inquilino> inquilinos = listar();
+        boolean rta =false;
+        for(Inquilino inquilino : inquilinos){
+            if(inquilino.getPersona().getDocumento().equals(documento) && inquilino.getPersona().getContrasenia().equals(contrasenia)){
+                rta=true;
+                break;
+            }
+        }
+        return rta;
     }
 }

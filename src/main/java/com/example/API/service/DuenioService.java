@@ -54,20 +54,15 @@ public class DuenioService implements IService<Duenio,DuenioDTO> {
         return this.guardar(dto.update(duenio));
     }
 
-    /*public List<Duenio> listarPorIdEdificio(Long id) {
-        List<Duenio> duenios=iDuenioRepository.findAll();
-        List<Duenio> dueniosDelEdificio= new ArrayList<>();
+    public boolean autenticar(String documento, String contrasenia){
+        List<Duenio> duenios = listar();
+        boolean rta =false;
         for(Duenio duenio : duenios){
-            System.out.print("---------------------DUENIO: "+duenio.getId());
-            List<Unidad> unidades = (List<Unidad>) duenio.getUnidades();
-            for(Unidad unidad : unidades){
-                System.out.print("---------------------UNIDAD: "+unidad.getId());
-                System.out.print("---------------------EDIFICIO: "+unidad.getEdificio().getId());
-                if(unidad.getEdificio().getId()==id){
-                    dueniosDelEdificio.add(duenio);
-                }
+            if(duenio.getPersona().getDocumento().equals(documento) && duenio.getPersona().getContrasenia().equals(contrasenia)){
+                rta=true;
+                break;
             }
         }
-        return dueniosDelEdificio;
-    }*/
+        return rta;
+    }
 }

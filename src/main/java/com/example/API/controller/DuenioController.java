@@ -50,4 +50,9 @@ public class DuenioController {
     public ResponseEntity<Duenio> modificar(@PathVariable( name = "id") Long id, @RequestBody DuenioDTO duenio) {
         return ResponseEntity.ok(duenioService.modificar(id, duenio));
     }
+
+    @GetMapping("/{documento}/{contrasenia}")
+    public boolean autenticar(@PathVariable String documento, @PathVariable String contrasenia) {
+        return duenioService.autenticar(documento,contrasenia);
+    }
 }

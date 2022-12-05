@@ -44,4 +44,9 @@ public class InquilinoController {
     public ResponseEntity<Inquilino> modificar(@PathVariable( name = "id") Long id, @RequestBody InquilinoDTO inquilino) {
         return ResponseEntity.ok(inquilinoService.modificar(id, inquilino));
     }
+
+    @GetMapping("/{documento}/{contrasenia}")
+    public boolean autenticar(@PathVariable String documento, @PathVariable String contrasenia) {
+        return inquilinoService.autenticar(documento,contrasenia);
+    }
 }
