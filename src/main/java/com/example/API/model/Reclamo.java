@@ -24,11 +24,8 @@ public class Reclamo{
     @Column
     private String estado;
 
-    @Column
-    private LocalDate fecha;
-
-    @Column
-    private String comentario;
+    //@Column
+    //private String comentario;
 
     @JsonBackReference
     @ManyToOne
@@ -48,15 +45,14 @@ public class Reclamo{
     public Reclamo(){
 
     }
-    public Reclamo(Long id, String ubicacion, String descripcion, String estado, Persona persona, Unidad unidad, LocalDate fecha, String comentario){
+    public Reclamo(Long id, String ubicacion, String descripcion, String estado, Persona persona, Unidad unidad){
         this.id=id;
         this.ubicacion=ubicacion;
         this.descripcion=descripcion;
         this.estado=estado;
         this.persona=persona;
         this.unidad=unidad;
-        this.fecha=fecha;
-        this.comentario=comentario;
+        //this.comentario=comentario;
     }
     public Long getId() {
         return id;
@@ -102,21 +98,13 @@ public class Reclamo{
         this.unidad=u;
     }
 
-    public LocalDate getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(LocalDate fecha) {
-        this.fecha = fecha;
-    }
-
-    public String getComentario() {
+    /*public String getComentario() {
         return comentario;
     }
 
     public void setComentario(String comentario) {
         this.comentario = comentario;
-    }
+    }*/
 
     public Set<Imagen> getImagenes() {
         return imagenes;

@@ -21,24 +21,21 @@ public class ReclamoDTO implements Serializable {
     private Long personaId;
     private Long unidadId;
 
-    private LocalDate fecha;
-
-    private String comentario;
+    //private String comentario;
     public ReclamoDTO(){
 
     }
-    public ReclamoDTO(Long id, String ubicacion, String descripcion, String estado, Long persona, Long unidad, LocalDate fecha, String comentario){
+    public ReclamoDTO(Long id, String ubicacion, String descripcion, String estado, Long persona, Long unidad){
         this.id=id;
         this.ubicacion=ubicacion;
         this.descripcion=descripcion;
         this.estado=estado;
         this.personaId=persona;
         this.unidadId=unidad;
-        this.fecha=fecha;
-        this.comentario=comentario;
+        //this.comentario=comentario;
     }
     public Reclamo newReclamo(Persona persona, Unidad unidad) {
-        return new Reclamo( this.id , this.ubicacion,this.descripcion,this.estado,persona,unidad,this.fecha,this.comentario);
+        return new Reclamo( this.id , this.ubicacion,this.descripcion,this.estado,persona,unidad);
     }
 
     public ReclamoDTO update(Reclamo reclamo){
@@ -48,12 +45,11 @@ public class ReclamoDTO implements Serializable {
             reclamo.setDescripcion(this.descripcion);
         if (this.estado != null && estado.length() <= ESTADO_MAX_LENGTH)
             reclamo.setEstado(this.estado);
-        if(this.comentario!=null && comentario.length()<= COMENTARIO_MAX_LENGTH)
-            reclamo.setComentario(comentario);
-        reclamo.setFecha(fecha);
+        //if(this.comentario!=null && comentario.length()<= COMENTARIO_MAX_LENGTH)
+          //  reclamo.setComentario(comentario);
         Long personaId = ( this.personaId == null )? reclamo.getPersona().getId() : this.personaId;
         Long unidadId = ( this.unidadId == null )? reclamo.getUnidad().getId() : this.unidadId;
-        return new ReclamoDTO(reclamo.getId(), reclamo.getUbicacion(),reclamo.getDescripcion(),reclamo.getEstado(),personaId,unidadId,reclamo.getFecha(),reclamo.getComentario());
+        return new ReclamoDTO(reclamo.getId(), reclamo.getUbicacion(),reclamo.getDescripcion(),reclamo.getEstado(),personaId,unidadId);
     }
 
     public Long getId() {
